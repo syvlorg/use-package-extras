@@ -174,17 +174,6 @@
 (add-to-list 'use-package-keywords :gadvice t)
 (add-to-list 'use-package-keywords :gradvice t)
 
-<<normalize-and-handle(name="postmaster", func="alloy-def")>>
-
-(setq use-package-keywords
-    (cl-loop for item in use-package-keywords
-        if (eq item :bind-keymap*)
-        collect :bind-keymap* and
-        collect :postmaster
-        else
-        unless (memq item '(:postmaster))
-        collect item))
-
 (with-eval-after-load 'tag
     <<normalize-and-handle(name="grook", func="tag-remove-hook")>>
 

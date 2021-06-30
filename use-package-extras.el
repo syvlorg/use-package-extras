@@ -207,25 +207,6 @@
 (add-to-list 'use-package-keywords :gadvice t)
 (add-to-list 'use-package-keywords :gradvice t)
 
-;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
-;;;###autoload
-(defalias 'use-package-normalize/:postmaster 'use-package-normalize-forms)
-
-;; Adapted From: https://gitlab.com/to1ne/use-package-hydra/-/blob/master/use-package-hydra.el#L79
-;;;###autoload
-(defun use-package-handler/:postmaster (name keyword args rest state)
-    (use-package-concat (mapcar #'(lambda (def) `(alloy-def ,@def)) args)
-    (use-package-process-keywords name rest state)))
-
-(setq use-package-keywords
-    (cl-loop for item in use-package-keywords
-        if (eq item :bind-keymap*)
-        collect :bind-keymap* and
-        collect :postmaster
-        else
-        unless (memq item '(:postmaster))
-        collect item))
-
 (with-eval-after-load 'tag
     ;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
     ;;;###autoload
