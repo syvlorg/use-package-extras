@@ -86,14 +86,14 @@
     (use-package-concat (mapcar #'(lambda (def) `(load-emacs-file ,@def)) args)
     (use-package-process-keywords name rest state)))
 
-;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
 ;;;###autoload
 (defalias 'use-package-normalize/:use-package-preconfig 'use-package-normalize-forms)
 
-;; Adapted From: https://gitlab.com/to1ne/use-package-hydra/-/blob/master/use-package-hydra.el#L79
 ;;;###autoload
 (defun use-package-handler/:use-package-preconfig (name keyword args rest state)
-    (use-package-concat (mapcar #'(lambda (def) `(use-package ,@def)) args)
+    (use-package-concat (mapcar #'(lambda (def) `(use-package
+        ,@def
+        ,@(unless (member :demand def) '(:demand t)))) args)
     (use-package-process-keywords name rest state)))
 
 ;; Adapted From: https://github.com/noctuid/general.el/blob/master/general.el#L2620
@@ -142,14 +142,12 @@
     (use-package-concat (mapcar #'(lambda (def) `(load-emacs-file ,@def)) args)
     (use-package-process-keywords name rest state)))
 
-;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
 ;;;###autoload
 (defalias 'use-package-normalize/:use-package-postconfig 'use-package-normalize-forms)
 
-;; Adapted From: https://gitlab.com/to1ne/use-package-hydra/-/blob/master/use-package-hydra.el#L79
 ;;;###autoload
 (defun use-package-handler/:use-package-postconfig (name keyword args rest state)
-    (use-package-concat (mapcar #'(lambda (def) `(use-package ,@def)) args)
+    (use-package-concat (mapcar #'(lambda (def) `(use-package ,@def :demand t)) args)
     (use-package-process-keywords name rest state)))
 
 (setq use-package-keywords

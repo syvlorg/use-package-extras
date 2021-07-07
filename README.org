@@ -100,7 +100,15 @@
 
 <<normalize-and-handle(name="load-emacs-file-preconfig", func="load-emacs-file")>>
 
-<<normalize-and-handle(name="use-package-preconfig", func="use-package")>>
+;;;###autoload
+(defalias 'use-package-normalize/:use-package-preconfig 'use-package-normalize-forms)
+
+;;;###autoload
+(defun use-package-handler/:use-package-preconfig (name keyword args rest state)
+    (use-package-concat (mapcar #'(lambda (def) `(use-package
+        ,@def
+        ,@(unless (member :demand def) '(:demand t)))) args)
+    (use-package-process-keywords name rest state)))
 
 ;; Adapted From: https://github.com/noctuid/general.el/blob/master/general.el#L2620
 (setq use-package-keywords
@@ -129,7 +137,13 @@
 
 <<normalize-and-handle(name="load-emacs-file-postconfig", func="load-emacs-file")>>
 
-<<normalize-and-handle(name="use-package-postconfig", func="use-package")>>
+;;;###autoload
+(defalias 'use-package-normalize/:use-package-postconfig 'use-package-normalize-forms)
+
+;;;###autoload
+(defun use-package-handler/:use-package-postconfig (name keyword args rest state)
+    (use-package-concat (mapcar #'(lambda (def) `(use-package ,@def :demand t)) args)
+    (use-package-process-keywords name rest state)))
 
 (setq use-package-keywords
     (cl-loop for item in use-package-keywords
