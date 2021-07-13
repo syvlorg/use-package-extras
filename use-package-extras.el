@@ -30,6 +30,12 @@
 ;; Important: https://github.com/noctuid/general.el/issues/53#issuecomment-307262154
 (require 'use-package-chords)
 (require 'use-package-deino)
+(require 'cl-lib)
+(require 'dash)
+
+;;;###autoload
+(defun load-emacs-file (path) (interactive)
+    (load (concat user-emacs-directory "lib/" path)))
 
 ;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
 ;;;###autoload
@@ -72,10 +78,6 @@
     (use-package-concat (mapcar #'(lambda (def) `(cl-defun ,@def)) args)
     (use-package-process-keywords name rest state)))
 
-;;;###autoload
-(defun load-emacs-file (path) (interactive)
-    (load (concat user-emacs-directory "lib/" path)))
-
 ;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
 ;;;###autoload
 (defalias 'use-package-normalize/:load-emacs-file-preconfig 'use-package-normalize-forms)
@@ -91,9 +93,7 @@
 
 ;;;###autoload
 (defun use-package-handler/:use-package-preconfig (name keyword args rest state)
-    (use-package-concat (mapcar #'(lambda (def) `(use-package
-        ,@def
-        ,@(unless (member :demand def) '(:demand t)))) args)
+    (use-package-concat (mapcar #'(lambda (def) `(use-package ,@def :demand ,(cl-getf def :demand t))) args)
     (use-package-process-keywords name rest state)))
 
 ;; Adapted From: https://github.com/noctuid/general.el/blob/master/general.el#L2620
@@ -147,7 +147,7 @@
 
 ;;;###autoload
 (defun use-package-handler/:use-package-postconfig (name keyword args rest state)
-    (use-package-concat (mapcar #'(lambda (def) `(use-package ,@def :demand t)) args)
+    (use-package-concat (mapcar #'(lambda (def) `(use-package ,@def :demand ,(cl-getf def :demand t))) args)
     (use-package-process-keywords name rest state)))
 
 (setq use-package-keywords
@@ -189,7 +189,7 @@
 ;; Adapted From: https://gitlab.com/to1ne/use-package-hydra/-/blob/master/use-package-hydra.el#L79
 ;;;###autoload
 (defun use-package-handler/:gadvice (name keyword args rest state)
-    (use-package-concat (mapcar #'(lambda (def) `(tag-add-advice ,@def)) args)
+    (use-package-concat (mapcar #'(lambda (def) `(alloy-add-advice ,@def)) args)
     (use-package-process-keywords name rest state)))
 
 ;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
@@ -199,13 +199,13 @@
 ;; Adapted From: https://gitlab.com/to1ne/use-package-hydra/-/blob/master/use-package-hydra.el#L79
 ;;;###autoload
 (defun use-package-handler/:gradvice (name keyword args rest state)
-    (use-package-concat (mapcar #'(lambda (def) `(tag-remove-advice ,@def)) args)
+    (use-package-concat (mapcar #'(lambda (def) `(alloy-remove-advice ,@def)) args)
     (use-package-process-keywords name rest state)))
 
 (add-to-list 'use-package-keywords :gadvice t)
 (add-to-list 'use-package-keywords :gradvice t)
 
-(with-eval-after-load 'tag
+(with-eval-after-load 'alloy
     ;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
     ;;;###autoload
     (defalias 'use-package-normalize/:grook 'use-package-normalize-forms)
@@ -213,7 +213,7 @@
     ;; Adapted From: https://gitlab.com/to1ne/use-package-hydra/-/blob/master/use-package-hydra.el#L79
     ;;;###autoload
     (defun use-package-handler/:grook (name keyword args rest state)
-        (use-package-concat (mapcar #'(lambda (def) `(tag-remove-hook ,@def)) args)
+        (use-package-concat (mapcar #'(lambda (def) `(alloy-remove-hook ,@def)) args)
         (use-package-process-keywords name rest state)))
 
     (setq use-package-keywords

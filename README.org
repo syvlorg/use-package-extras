@@ -53,6 +53,12 @@
 ;; Important: https://github.com/noctuid/general.el/issues/53#issuecomment-307262154
 (require 'use-package-chords)
 (require 'use-package-deino)
+(require 'cl-lib)
+(require 'dash)
+
+;;;###autoload
+(defun load-emacs-file (path) (interactive)
+    (load (concat user-emacs-directory "lib/" path)))
 
 <<leaf>>
 
@@ -60,7 +66,7 @@
 
 <<around-config>>
 
-<<tag>>
+<<alloy>>
 
 <<ex>>
 
@@ -94,10 +100,6 @@
 
 <<normalize-and-handle(name="init/defun*", func="cl-defun")>>
 
-;;;###autoload
-(defun load-emacs-file (path) (interactive)
-    (load (concat user-emacs-directory "lib/" path)))
-
 <<normalize-and-handle(name="load-emacs-file-preconfig", func="load-emacs-file")>>
 
 ;;;###autoload
@@ -105,9 +107,7 @@
 
 ;;;###autoload
 (defun use-package-handler/:use-package-preconfig (name keyword args rest state)
-    (use-package-concat (mapcar #'(lambda (def) `(use-package
-        ,@def
-        ,@(unless (member :demand def) '(:demand t)))) args)
+    (use-package-concat (mapcar #'(lambda (def) `(use-package ,@def :demand ,(cl-getf def :demand t))) args)
     (use-package-process-keywords name rest state)))
 
 ;; Adapted From: https://github.com/noctuid/general.el/blob/master/general.el#L2620
@@ -142,7 +142,7 @@
 
 ;;;###autoload
 (defun use-package-handler/:use-package-postconfig (name keyword args rest state)
-    (use-package-concat (mapcar #'(lambda (def) `(use-package ,@def :demand t)) args)
+    (use-package-concat (mapcar #'(lambda (def) `(use-package ,@def :demand ,(cl-getf def :demand t))) args)
     (use-package-process-keywords name rest state)))
 
 (setq use-package-keywords
@@ -161,9 +161,9 @@
         collect item))
 #+end_src
 
-** tag
+** alloy
 
-#+name: tag
+#+name: alloy
 #+begin_src emacs-lisp
 <<normalize-and-handle(name="gsetq", func="alloy-setq")>>
 
@@ -174,15 +174,15 @@
         else
         unless (eq item :gsetq)
         collect item))
-<<normalize-and-handle(name="gadvice", func="tag-add-advice")>>
+<<normalize-and-handle(name="gadvice", func="alloy-add-advice")>>
 
-<<normalize-and-handle(name="gradvice", func="tag-remove-advice")>>
+<<normalize-and-handle(name="gradvice", func="alloy-remove-advice")>>
 
 (add-to-list 'use-package-keywords :gadvice t)
 (add-to-list 'use-package-keywords :gradvice t)
 
-(with-eval-after-load 'tag
-    <<normalize-and-handle(name="grook", func="tag-remove-hook")>>
+(with-eval-after-load 'alloy
+    <<normalize-and-handle(name="grook", func="alloy-remove-hook")>>
 
     (setq use-package-keywords
         (cl-loop for item in use-package-keywords
