@@ -70,6 +70,8 @@
 
 <<ex>>
 
+<<which-key>>
+
 (provide 'use-package-extras)
 ;;; use-package-extras.el ends here
 #+end_src
@@ -209,4 +211,21 @@
 <<normalize-and-handle(name="both-ex", func="meq/both-ex-define-cmd")>>
 
 (add-to-list 'use-package-keywords :both-ex t)
+#+end_src
+
+** which-key
+
+#+name: which-key
+#+begin_src emacs-lisp
+<<normalize-and-handle(name="which-key-change", func="meq/which-key-change")>>
+
+(add-to-list 'use-package-keywords :which-key-change t)
+
+<<normalize-and-handle(name="which-key-change-ryo", func="meq/which-key-change-ryo")>>
+
+(add-to-list 'use-package-keywords :which-key-change-ryo t)
+
+<<normalize-and-handle(name="which-key-change-sorrow", func="meq/which-key-change-sorrow")>>
+
+(add-to-list 'use-package-keywords :which-key-change-sorrow t)
 #+end_src

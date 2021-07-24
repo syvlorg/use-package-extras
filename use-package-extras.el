@@ -261,5 +261,41 @@
 
 (add-to-list 'use-package-keywords :both-ex t)
 
+;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
+;;;###autoload
+(defalias 'use-package-normalize/:which-key-change 'use-package-normalize-forms)
+
+;; Adapted From: https://gitlab.com/to1ne/use-package-hydra/-/blob/master/use-package-hydra.el#L79
+;;;###autoload
+(defun use-package-handler/:which-key-change (name keyword args rest state)
+    (use-package-concat (mapcar #'(lambda (def) `(meq/which-key-change ,@def)) args)
+    (use-package-process-keywords name rest state)))
+
+(add-to-list 'use-package-keywords :which-key-change t)
+
+;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
+;;;###autoload
+(defalias 'use-package-normalize/:which-key-change-ryo 'use-package-normalize-forms)
+
+;; Adapted From: https://gitlab.com/to1ne/use-package-hydra/-/blob/master/use-package-hydra.el#L79
+;;;###autoload
+(defun use-package-handler/:which-key-change-ryo (name keyword args rest state)
+    (use-package-concat (mapcar #'(lambda (def) `(meq/which-key-change-ryo ,@def)) args)
+    (use-package-process-keywords name rest state)))
+
+(add-to-list 'use-package-keywords :which-key-change-ryo t)
+
+;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
+;;;###autoload
+(defalias 'use-package-normalize/:which-key-change-sorrow 'use-package-normalize-forms)
+
+;; Adapted From: https://gitlab.com/to1ne/use-package-hydra/-/blob/master/use-package-hydra.el#L79
+;;;###autoload
+(defun use-package-handler/:which-key-change-sorrow (name keyword args rest state)
+    (use-package-concat (mapcar #'(lambda (def) `(meq/which-key-change-sorrow ,@def)) args)
+    (use-package-process-keywords name rest state)))
+
+(add-to-list 'use-package-keywords :which-key-change-sorrow t)
+
 (provide 'use-package-extras)
 ;;; use-package-extras.el ends here
