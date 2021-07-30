@@ -96,6 +96,17 @@
     (use-package-concat (mapcar #'(lambda (def) `(use-package ,@def :demand ,(cl-getf def :demand t))) args)
     (use-package-process-keywords name rest state)))
 
+;;;###autoload
+(defalias 'use-package-normalize/:upnsd-preconfig 'use-package-normalize-forms)
+
+;;;###autoload
+(defun use-package-handler/:upnsd-preconfig (name keyword args rest state)
+    (use-package-concat (mapcar #'(lambda (def) `(use-package
+                                                    ,@def
+                                                    :demand ,(cl-getf def :demand t)
+                                                    :straight ,(cl-getf def :straight nil))) args)
+    (use-package-process-keywords name rest state)))
+
 ;; Adapted From: https://github.com/noctuid/general.el/blob/master/general.el#L2620
 (setq use-package-keywords
     (cl-loop for item in use-package-keywords
@@ -104,12 +115,14 @@
         collect :init/defun and
         collect :init/defun* and
         collect :load-emacs-file-preconfig and
-        collect :use-package-preconfig
+        collect :use-package-preconfig and
+        collect :upnsd-preconfig
         else
         unless (memq item '(:init/defun
                             :init/defun*
                             :load-emacs-file-preconfig
-                            :use-package-preconfig))
+                            :use-package-preconfig
+                            :upnsd-preconfig))
         collect item))
 
 ;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
@@ -150,6 +163,17 @@
     (use-package-concat (mapcar #'(lambda (def) `(use-package ,@def :demand ,(cl-getf def :demand t))) args)
     (use-package-process-keywords name rest state)))
 
+;;;###autoload
+(defalias 'use-package-normalize/:upnsd-postconfig 'use-package-normalize-forms)
+
+;;;###autoload
+(defun use-package-handler/:upnsd-postconfig (name keyword args rest state)
+    (use-package-concat (mapcar #'(lambda (def) `(use-package
+                                                    ,@def
+                                                    :demand ,(cl-getf def :demand t)
+                                                    :straight ,(cl-getf def :straight nil))) args)
+    (use-package-process-keywords name rest state)))
+
 (setq use-package-keywords
     (cl-loop for item in use-package-keywords
         if (eq item :load)
@@ -157,12 +181,14 @@
         collect :config/defun and
         collect :config/defun* and
         collect :load-emacs-file-postconfig and
-        collect :use-package-postconfig
+        collect :use-package-postconfig and
+        collect :upnsd-postconfig
         else
         unless (memq item '(:config/defun
                             :config/defun*
                             :load-emacs-file-postconfig
-                            :use-package-postconfig))
+                            :use-package-postconfig
+                            :upnsd-postconfig))
         collect item))
 
 ;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
