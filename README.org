@@ -1,11 +1,10 @@
-#!/usr/bin/env mdsh
-#+property: header-args -n -r -l "[{(<%s>)}]" :tangle-mode (identity 0444) :noweb yes :mkdirp yes
-#+startup: show3levels
+#+setupfile: ./settings/README.org
+#+include: ./settings/README.org
 
-* use-package-extras
+* use-package-extras.el
 
 #+name: normalize-and-handle
-#+begin_src emacs-lisp :var name="" :var func="" :exports none
+#+begin_src emacs-lisp :var name="" :var func=""
 ;; Adapted From:
 ;; Answer: https://emacs.stackexchange.com/a/7381/31428
 ;; User: https://emacs.stackexchange.com/users/719/adobe
@@ -20,7 +19,7 @@
     (use-package-process-keywords name rest state)))" `((?n . ,name) (?f . ,func)))
 #+end_src
 
-#+begin_src emacs-lisp :tangle use-package-extras.el :exports none
+#+begin_src emacs-lisp :tangle (meq/tangle-path)
 ;;; use-package-extras.el --- a simple package                     -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2021  Jeet Ray
