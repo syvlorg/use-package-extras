@@ -159,6 +159,8 @@
 
 <<normalize-and-handle(name="load-emacs-file-postconfig", func="meq/load-emacs-file")>>
 
+<<normalize-and-handle(name="load-siluam-file-postconfig", func="meq/load-siluam-file")>>
+
 <<normalize-and-handle(name="use-package-postconfig", func="meq/up")>>
 
 <<normalize-and-handle(name="upnsd-postconfig", func="meq/upnsd")>>
@@ -170,12 +172,14 @@
         collect :config/defun and
         collect :config/defun* and
         collect :load-emacs-file-postconfig and
+        collect :load-siluam-file-postconfig and
         collect :use-package-postconfig and
         collect :upnsd-postconfig
         else
         unless (memq item '(:config/defun
                             :config/defun*
                             :load-emacs-file-postconfig
+                            :load-siluam-file-postconfig
                             :use-package-postconfig
                             :upnsd-postconfig))
         collect item))
