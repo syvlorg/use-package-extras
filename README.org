@@ -1,6 +1,3 @@
-#+setupfile: ./settings/README.org
-#+include: ./settings/README.org
-
 * use-package-extras.el
 
 #+name: normalize-and-handle

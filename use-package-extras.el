@@ -1,4 +1,3 @@
-;; [[file:README.org::*use-package-extras.el][use-package-extras.el:2]]
 ;;; use-package-extras.el --- a simple package                     -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2021  Jeet Ray
@@ -371,4 +370,3 @@
 
 (provide 'use-package-extras)
 ;;; use-package-extras.el ends here
-;; use-package-extras.el:2 ends here
