@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-11-14 Mon 10:38 -->
+<!-- 2022-11-16 Wed 23:40 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -53,25 +53,25 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org0628737">use-package-extras.el</a>
+<li><a href="#orgf681bdb">use-package-extras.el</a>
 <ul>
-<li><a href="#orgdc5d367">leaf</a></li>
-<li><a href="#org32990dc">around init</a></li>
-<li><a href="#org7563991">around config</a></li>
-<li><a href="#org248ccd4">alloy</a></li>
-<li><a href="#org3ba6578">ex</a></li>
-<li><a href="#org5f6ca79">which-key</a></li>
+<li><a href="#org9fb8567">leaf</a></li>
+<li><a href="#org0a3e872">around init</a></li>
+<li><a href="#org4026158">around config</a></li>
+<li><a href="#org39f6866">alloy</a></li>
+<li><a href="#orgf03e7d1">ex</a></li>
+<li><a href="#org1528644">which-key</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org0628737" class="outline-2">
-<h2 id="org0628737">use-package-extras.el</h2>
-<div class="outline-text-2" id="text-org0628737">
+<div id="outline-container-orgf681bdb" class="outline-2">
+<h2 id="orgf681bdb">use-package-extras.el</h2>
+<div class="outline-text-2" id="text-orgf681bdb">
 <div class="org-src-container">
-<pre><code class="language-lisp match-braces rainbow-braces" id="orgc5a7f4a">;; Adapted From:
+<pre><code class="language-lisp match-braces rainbow-braces" id="orgf6c7714">;; Adapted From:
 ;; Answer: https://emacs.stackexchange.com/a/7381/31428
 ;; User: https://emacs.stackexchange.com/users/719/adobe
 (format-spec ";; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
@@ -132,18 +132,31 @@
 
 ;;;###autoload
 (defmacro meq/up (&amp;rest args) (interactive)
-    `(use-package ,@args :demand ,(cl-getf args :demand t)))
+    (let* ((pkg (car args))
+            (args (cdr args)))
+        `(use-package
+            ,pkg
+            :demand ,(unwind-protect (cl-getf args :demand t) (cl-remf args :demand))
+            ,@args)))
 
 ;;;###autoload
 (defmacro meq/upns (&amp;rest args) (interactive)
-    `(use-package ,@args ,@(with-eval-after-load 'straight `(:straight ,(cl-getf args :straight nil)))))
+    (let* ((pkg (car args))
+            (args (cdr args)))
+        `(use-package
+            ,pkg
+            ,@(with-eval-after-load 'straight `(:straight ,(unwind-protect (cl-getf args :straight t) (cl-remf args :straight))))
+            ,@args)))
 
 ;;;###autoload
 (defmacro meq/upnsd (&amp;rest args) (interactive)
-    `(use-package
-        ,@args
-        :demand ,(cl-getf args :demand t)
-        ,@(with-eval-after-load 'straight `(:straight ,(cl-getf args :straight nil)))))
+    (let* ((pkg (car args))
+            (args (cdr args)))
+        `(use-package
+            ,pkg
+            :demand ,(unwind-protect (cl-getf args :demand t) (cl-remf args :demand))
+            ,@(with-eval-after-load 'straight `(:straight ,(unwind-protect (cl-getf args :straight t) (cl-remf args :straight))))
+            ,@args)))
 
 ;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
 ;;;###autoload
@@ -463,11 +476,11 @@
 </div>
 </div>
 
-<div id="outline-container-orgdc5d367" class="outline-3">
-<h3 id="orgdc5d367">leaf</h3>
-<div class="outline-text-3" id="text-orgdc5d367">
+<div id="outline-container-org9fb8567" class="outline-3">
+<h3 id="org9fb8567">leaf</h3>
+<div class="outline-text-3" id="text-org9fb8567">
 <div class="org-src-container">
-<pre><code class="language-lisp match-braces rainbow-braces" id="orgd7c95de">;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
+<pre><code class="language-lisp match-braces rainbow-braces" id="org865875b">;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
 ;;;###autoload
 (defalias 'use-package-normalize/:leaf 'use-package-normalize-forms)
 
@@ -492,11 +505,11 @@
 </div>
 </div>
 
-<div id="outline-container-org32990dc" class="outline-3">
-<h3 id="org32990dc">around init</h3>
-<div class="outline-text-3" id="text-org32990dc">
+<div id="outline-container-org0a3e872" class="outline-3">
+<h3 id="org0a3e872">around init</h3>
+<div class="outline-text-3" id="text-org0a3e872">
 <div class="org-src-container">
-<pre><code class="language-lisp match-braces rainbow-braces" id="org3710621">;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
+<pre><code class="language-lisp match-braces rainbow-braces" id="org548d02c">;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
 ;;;###autoload
 (defalias 'use-package-normalize/:init/defun 'use-package-normalize-forms)
 
@@ -580,11 +593,11 @@
 </div>
 </div>
 
-<div id="outline-container-org7563991" class="outline-3">
-<h3 id="org7563991">around config</h3>
-<div class="outline-text-3" id="text-org7563991">
+<div id="outline-container-org4026158" class="outline-3">
+<h3 id="org4026158">around config</h3>
+<div class="outline-text-3" id="text-org4026158">
 <div class="org-src-container">
-<pre><code class="language-lisp match-braces rainbow-braces" id="orgf867cf7">;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
+<pre><code class="language-lisp match-braces rainbow-braces" id="org87c1997">;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
 ;;;###autoload
 (defalias 'use-package-normalize/:config/defun 'use-package-normalize-forms)
 
@@ -667,11 +680,11 @@
 </div>
 </div>
 
-<div id="outline-container-org248ccd4" class="outline-3">
-<h3 id="org248ccd4">alloy</h3>
-<div class="outline-text-3" id="text-org248ccd4">
+<div id="outline-container-org39f6866" class="outline-3">
+<h3 id="org39f6866">alloy</h3>
+<div class="outline-text-3" id="text-org39f6866">
 <div class="org-src-container">
-<pre><code class="language-lisp match-braces rainbow-braces" id="org59b2fac">;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
+<pre><code class="language-lisp match-braces rainbow-braces" id="org5cd183e">;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
 ;;;###autoload
 (defalias 'use-package-normalize/:gsetq 'use-package-normalize-forms)
 
@@ -735,11 +748,11 @@
 </div>
 </div>
 
-<div id="outline-container-org3ba6578" class="outline-3">
-<h3 id="org3ba6578">ex</h3>
-<div class="outline-text-3" id="text-org3ba6578">
+<div id="outline-container-orgf03e7d1" class="outline-3">
+<h3 id="orgf03e7d1">ex</h3>
+<div class="outline-text-3" id="text-orgf03e7d1">
 <div class="org-src-container">
-<pre><code class="language-lisp match-braces rainbow-braces" id="orgd6eee57">;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
+<pre><code class="language-lisp match-braces rainbow-braces" id="org2c5e13a">;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
 ;;;###autoload
 (defalias 'use-package-normalize/:evil-ex 'use-package-normalize-forms)
 
@@ -779,11 +792,11 @@
 </div>
 </div>
 
-<div id="outline-container-org5f6ca79" class="outline-3">
-<h3 id="org5f6ca79">which-key</h3>
-<div class="outline-text-3" id="text-org5f6ca79">
+<div id="outline-container-org1528644" class="outline-3">
+<h3 id="org1528644">which-key</h3>
+<div class="outline-text-3" id="text-org1528644">
 <div class="org-src-container">
-<pre><code class="language-lisp match-braces rainbow-braces" id="org6e48ed7">;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
+<pre><code class="language-lisp match-braces rainbow-braces" id="org4c725b7">;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
 ;;;###autoload
 (defalias 'use-package-normalize/:which-key-change 'use-package-normalize-forms)
 
@@ -826,7 +839,7 @@
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jeet Ray</p>
-<p class="date">Created: 2022-11-14 Mon 10:38</p>
+<p class="date">Created: 2022-11-16 Wed 23:40</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

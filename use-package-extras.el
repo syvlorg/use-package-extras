@@ -43,18 +43,31 @@
 
 ;;;###autoload
 (defmacro meq/up (&rest args) (interactive)
-    `(use-package ,@args :demand ,(cl-getf args :demand t)))
+    (let* ((pkg (car args))
+            (args (cdr args)))
+        `(use-package
+            ,pkg
+            :demand ,(unwind-protect (cl-getf args :demand t) (cl-remf args :demand))
+            ,@args)))
 
 ;;;###autoload
 (defmacro meq/upns (&rest args) (interactive)
-    `(use-package ,@args ,@(with-eval-after-load 'straight `(:straight ,(cl-getf args :straight nil)))))
+    (let* ((pkg (car args))
+            (args (cdr args)))
+        `(use-package
+            ,pkg
+            ,@(with-eval-after-load 'straight `(:straight ,(unwind-protect (cl-getf args :straight t) (cl-remf args :straight))))
+            ,@args)))
 
 ;;;###autoload
 (defmacro meq/upnsd (&rest args) (interactive)
-    `(use-package
-        ,@args
-        :demand ,(cl-getf args :demand t)
-        ,@(with-eval-after-load 'straight `(:straight ,(cl-getf args :straight nil)))))
+    (let* ((pkg (car args))
+            (args (cdr args)))
+        `(use-package
+            ,pkg
+            :demand ,(unwind-protect (cl-getf args :demand t) (cl-remf args :demand))
+            ,@(with-eval-after-load 'straight `(:straight ,(unwind-protect (cl-getf args :straight t) (cl-remf args :straight))))
+            ,@args)))
 
 ;; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153
 ;;;###autoload
