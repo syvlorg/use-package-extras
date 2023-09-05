@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-09-04 Mon 22:17 -->
+<!-- 2023-09-05 Tue 00:53 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -31,25 +31,25 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org9726a84">use-package-extras.el</a>
+<li><a href="#org3188464">use-package-extras.el</a>
 <ul>
-<li><a href="#orge9f42a4">leaf</a></li>
-<li><a href="#orgd30f8d4">around init</a></li>
-<li><a href="#org761d058">around config</a></li>
-<li><a href="#org9553a65">alloy</a></li>
-<li><a href="#org881dcfa">ex</a></li>
-<li><a href="#org5f317e2">which-key</a></li>
+<li><a href="#org64e574c">leaf</a></li>
+<li><a href="#org44388d4">around init</a></li>
+<li><a href="#org10dabb5">around config</a></li>
+<li><a href="#org92928b8">alloy</a></li>
+<li><a href="#org95493a2">ex</a></li>
+<li><a href="#org5389511">which-key</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org9726a84" class="outline-2">
-<h2 id="org9726a84">use-package-extras.el</h2>
-<div class="outline-text-2" id="text-org9726a84">
+<div id="outline-container-org3188464" class="outline-2">
+<h2 id="org3188464">use-package-extras.el</h2>
+<div class="outline-text-2" id="text-org3188464">
 <div class="org-src-container">
-<pre><code class="language-lisp match-braces rainbow-braces" id="orgda5bc4b"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Adapted From:</span>
+<pre><code class="language-lisp match-braces rainbow-braces" id="orgc603f64"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Adapted From:</span>
 <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Answer: https://emacs.stackexchange.com/a/7381/31428</span>
 <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">User: https://emacs.stackexchange.com/users/719/adobe</span>
 (format-spec <span style="font-style: italic;">";; Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153</span>
@@ -454,11 +454,11 @@
 </div>
 </div>
 
-<div id="outline-container-orge9f42a4" class="outline-3">
-<h3 id="orge9f42a4">leaf</h3>
-<div class="outline-text-3" id="text-orge9f42a4">
+<div id="outline-container-org64e574c" class="outline-3">
+<h3 id="org64e574c">leaf</h3>
+<div class="outline-text-3" id="text-org64e574c">
 <div class="org-src-container">
-<pre><code class="language-lisp match-braces rainbow-braces" id="org25da665"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153</span>
+<pre><code class="language-lisp match-braces rainbow-braces" id="org0892413"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153</span>
 <span style="font-weight: bold; font-style: italic;">;;;</span><span style="font-weight: bold; font-style: italic;">###</span><span style="font-weight: bold; font-style: italic;">autoload</span>
 (<span style="font-weight: bold;">defalias</span> '<span style="font-weight: bold;">use-package-normalize/:leaf</span> 'use-package-normalize-forms)
 
@@ -483,11 +483,11 @@
 </div>
 </div>
 
-<div id="outline-container-orgd30f8d4" class="outline-3">
-<h3 id="orgd30f8d4">around init</h3>
-<div class="outline-text-3" id="text-orgd30f8d4">
+<div id="outline-container-org44388d4" class="outline-3">
+<h3 id="org44388d4">around init</h3>
+<div class="outline-text-3" id="text-org44388d4">
 <div class="org-src-container">
-<pre><code class="language-lisp match-braces rainbow-braces" id="org06799c5"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153</span>
+<pre><code class="language-lisp match-braces rainbow-braces" id="org9c44ae7"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153</span>
 <span style="font-weight: bold; font-style: italic;">;;;</span><span style="font-weight: bold; font-style: italic;">###</span><span style="font-weight: bold; font-style: italic;">autoload</span>
 (<span style="font-weight: bold;">defalias</span> '<span style="font-weight: bold;">use-package-normalize/:init/defun</span> 'use-package-normalize-forms)
 
@@ -571,11 +571,11 @@
 </div>
 </div>
 
-<div id="outline-container-org761d058" class="outline-3">
-<h3 id="org761d058">around config</h3>
-<div class="outline-text-3" id="text-org761d058">
+<div id="outline-container-org10dabb5" class="outline-3">
+<h3 id="org10dabb5">around config</h3>
+<div class="outline-text-3" id="text-org10dabb5">
 <div class="org-src-container">
-<pre><code class="language-lisp match-braces rainbow-braces" id="org3421f46"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153</span>
+<pre><code class="language-lisp match-braces rainbow-braces" id="org07af3fc"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153</span>
 <span style="font-weight: bold; font-style: italic;">;;;</span><span style="font-weight: bold; font-style: italic;">###</span><span style="font-weight: bold; font-style: italic;">autoload</span>
 (<span style="font-weight: bold;">defalias</span> '<span style="font-weight: bold;">use-package-normalize/:config/defun</span> 'use-package-normalize-forms)
 
@@ -658,11 +658,11 @@
 </div>
 </div>
 
-<div id="outline-container-org9553a65" class="outline-3">
-<h3 id="org9553a65">alloy</h3>
-<div class="outline-text-3" id="text-org9553a65">
+<div id="outline-container-org92928b8" class="outline-3">
+<h3 id="org92928b8">alloy</h3>
+<div class="outline-text-3" id="text-org92928b8">
 <div class="org-src-container">
-<pre><code class="language-lisp match-braces rainbow-braces" id="orga7dc72e"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153</span>
+<pre><code class="language-lisp match-braces rainbow-braces" id="org10defcb"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153</span>
 <span style="font-weight: bold; font-style: italic;">;;;</span><span style="font-weight: bold; font-style: italic;">###</span><span style="font-weight: bold; font-style: italic;">autoload</span>
 (<span style="font-weight: bold;">defalias</span> '<span style="font-weight: bold;">use-package-normalize/:gsetq</span> 'use-package-normalize-forms)
 
@@ -726,11 +726,11 @@
 </div>
 </div>
 
-<div id="outline-container-org881dcfa" class="outline-3">
-<h3 id="org881dcfa">ex</h3>
-<div class="outline-text-3" id="text-org881dcfa">
+<div id="outline-container-org95493a2" class="outline-3">
+<h3 id="org95493a2">ex</h3>
+<div class="outline-text-3" id="text-org95493a2">
 <div class="org-src-container">
-<pre><code class="language-lisp match-braces rainbow-braces" id="orgc0f51ae"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153</span>
+<pre><code class="language-lisp match-braces rainbow-braces" id="org66c4555"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153</span>
 <span style="font-weight: bold; font-style: italic;">;;;</span><span style="font-weight: bold; font-style: italic;">###</span><span style="font-weight: bold; font-style: italic;">autoload</span>
 (<span style="font-weight: bold;">defalias</span> '<span style="font-weight: bold;">use-package-normalize/:evil-ex</span> 'use-package-normalize-forms)
 
@@ -770,11 +770,11 @@
 </div>
 </div>
 
-<div id="outline-container-org5f317e2" class="outline-3">
-<h3 id="org5f317e2">which-key</h3>
-<div class="outline-text-3" id="text-org5f317e2">
+<div id="outline-container-org5389511" class="outline-3">
+<h3 id="org5389511">which-key</h3>
+<div class="outline-text-3" id="text-org5389511">
 <div class="org-src-container">
-<pre><code class="language-lisp match-braces rainbow-braces" id="org2ee2fcf"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153</span>
+<pre><code class="language-lisp match-braces rainbow-braces" id="org4cfb325"><span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Adapted From: https://github.com/jwiegley/use-package/blob/master/use-package-core.el#L1153</span>
 <span style="font-weight: bold; font-style: italic;">;;;</span><span style="font-weight: bold; font-style: italic;">###</span><span style="font-weight: bold; font-style: italic;">autoload</span>
 (<span style="font-weight: bold;">defalias</span> '<span style="font-weight: bold;">use-package-normalize/:which-key-change</span> 'use-package-normalize-forms)
 
@@ -817,7 +817,7 @@
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jeet Ray</p>
-<p class="date">Created: 2023-09-04 Mon 22:17</p>
+<p class="date">Created: 2023-09-05 Tue 00:53</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
